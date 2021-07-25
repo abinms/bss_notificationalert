@@ -13,7 +13,7 @@ CurrTime=`date +%r`
 SearchTimeTab=`date -d '1 day ago' "+%Y-%m-%d"`
 echo "Today " $TodayDate
 echo "LastDay " $SearchTimeTab
-mysql -uerecharge -precharge@6Dtech -h127.0.0.1 -P3306 ERECHARGE_MALAWI -ANe "SELECT CASE WHEN LEVEL_ID=2 THEN 'Dealer' WHEN LEVEL_ID=5 THEN 'Agent' WHEN LEVEL_ID=7 THEN 'Vendor' WHEN LEVEL_ID=6 THEN 'Independent Vendor' END AS ITEM, count(LEVEL_ID) AS TOTAL,sum(case when STATUS='1' then 1 else 0 end) as ACTIVE,sum(case when STATUS='0' then 1 else 0 end) AS INACTIVE FROM MFS_ETOPUP_USER_MASTER WHERE LEVEL_ID in (2,5,6,7) GROUP BY LEVEL_ID;\q" > /home/erecharge/Script/Onboarding_status_alert/Onboard_status.txt
+mysql -uerecharge -precharge@6Dtech -h127.0.0.1 -P3306 ERECHARGE_INDO -ANe "SELECT CASE WHEN LEVEL_ID=2 THEN 'Dealer' WHEN LEVEL_ID=5 THEN 'Agent' WHEN LEVEL_ID=7 THEN 'Vendor' WHEN LEVEL_ID=6 THEN 'Independent Vendor' END AS ITEM, count(LEVEL_ID) AS TOTAL,sum(case when STATUS='1' then 1 else 0 end) as ACTIVE,sum(case when STATUS='0' then 1 else 0 end) AS INACTIVE FROM MFS_ETOPUP_USER_MASTER WHERE LEVEL_ID in (2,5,6,7) GROUP BY LEVEL_ID;\q" > /home/erecharge/Script/Onboarding_status_alert/Onboard_status.txt
 cd /home/erecharge/Script/Onboarding_status_alert/
 sed -i 's/Independent Vendor/Independent_Vendor/g' Onboard_status.txt
 
