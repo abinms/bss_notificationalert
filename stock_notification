@@ -1,0 +1,16 @@
+  
+#!/bin/bash
+. ~/.bashrc
+#########################
+# Author:               #
+# Abin Sebastian        #
+#Implementation Enginer #
+# 6D Technologies       #
+#########################
+echo "===Start==="
+cd /opt/report/Vipin/MFS_Tashicell/REPORT_SENDER
+rm -vf Stock_Report_Body.html
+lftp -e "set cmd:fail-exit yes; set net:reconnect-interval-base 10; set net:max-retries 2;cd /home/erecharge/Script/TNM_Stock;mget Stock_Report_Body.html ; quit" -u erecharge,recharge@123 sftp://172.19.110.63
+#Send Mail
+/usr/bin/mutt -F muttrc -e 'set content_type="text/html"' adam.gondwe@tnm.co.mw,khumbo.hango@tnm.co.mw,Vinjeru.Vinkhumbo@tnm.co.mw,Yamikani.Bakuwa@tnm.co.mw -c abin.sebastian@6dtech.co.in -s "TNM EVD - STOCK REPORT" < Stock_Report_Body.html
+echo "====End===="
